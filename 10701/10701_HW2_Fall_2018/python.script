@@ -1,0 +1,10 @@
+#!/bin/bash
+python3 NB.py 32.data
+python3 NB.py 64.data
+python3 NB.py 128.data
+python3 NB.py 256.data
+python3 NB.py 512.data
+python3 NB.py 1024.data
+python3 NB.py 2048.data
+python3 NB.py 4096.data
+python3 NB.py 8192.data
