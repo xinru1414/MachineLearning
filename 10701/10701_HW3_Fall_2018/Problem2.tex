@@ -1,0 +1,77 @@
+\section*{Problem 2: Perceptron [20 pts]}
+\subsection*{2.1 Proving convergence in linear separability [10 pts]}
+
+Consider the scenario where we are using linear classifiers (passing through origin) as our learning model ($h(\mathbf{x}) = sign (\mathbf{w^T x}))$, and the perceptron algorithm as our learning algorithm. Given a dataset of n samples of d-dimensional vectors ($\mathbf{x_i}$) with class labels ($y_i$), where the labels can take only 2 values $+1$ or $-1$, assume that there exists a weight vector $\mathbf{w^*}$ that linearly separates the positive and negative samples, such that:
+
+\begin{equation}
+y_i (\mathbf{w^*})^T \mathbf{x_i} \geq \gamma, \forall i
+\label{eq1}
+\end{equation}
+
+where, $\gamma > 0 (\gamma \in \mathbb{R})$, 
+$\mathbf{x_i} \in \mathbb{R}^d$, 
+$y_i \in \{+1, -1\}$, 
+$\mathbf{w^*} \in \mathbb{R}^d$. 
+
+The perceptron algorithm starts with $\mathbf{w^{(0)}} = \mathbf{0}$ (superscript denotes update-step number), and updates the weight vector at the $k$th step when it encounters a misclassified sample, $\mathbf{w^{(k)}} = \mathbf{w^{(k-1)}} + y_k \mathbf{x_k}$. A sample $(\mathbf{x},y)$ is misclassified (at a step $i$) if:
+\begin{equation}
+ y {\mathbf{(w^{(i-1)})}^T \mathbf{x}} \leq 0 
+ \label{eq2}
+\end{equation}
+
+Assume further that for all training input vectors, the $L_2$ norm is bounded, $||\mathbf{x_i}||_2 \leq V$ ($\forall i = 1 .. n$).
+
+Show that the number of updates ($t$) to the weight vector starting from $\mathbf{w^{(0)}} = 0$ in such a scenario is bounded by $\frac{V^2 ||\mathbf{w^*}||^2_2}{\gamma^2}$.
+
+For proving this result:
+\begin{enumerate}
+    \item Try to lower bound $\mathbf{w^*}^T\mathbf{w^{(t)}}$, using Equation \ref{eq1}. Specifically show that $\mathbf{w^*}^T\mathbf{w^{(t)}} \geq t\gamma $.
+    \item Now, upper bound $||\mathbf{w^{(t)}}||^2$ using the update rule (Equation \ref{eq2}), and show that $||\mathbf{w^{(t)}}||^2_2 \leq t V^2 $.
+    \item Now use the above two parts to get the desired result. (Hint: use cosine of $\mathbf{w^*}$, $\mathbf{w^{(t)}}$)
+\end{enumerate}
+
+\begin{soln}
+        % Type solution here
+\end{soln}
+
+\newpage
+
+\subsection*{2.2 Implementing perceptron algorithm [10 pts]}
+Let's consider the linear classification model with a bias term, 
+\begin{equation}
+h(\mathbf{x}) = sign (\mathbf{w^T x} + b)
+\label{df}
+\end{equation}
+where $sign(v)$ outputs $+1$ if $v \geq 0$, and $-1$ otherwise. 
+
+The perceptron learning algorithm can be expressed as follows (for a given dataset $D = \{\mathbf{x_i}, y_i\}, i = 1..n , \mathbf{x_i} \in \mathbb{R}^d, y_i \in \{+1, -1\}$):
+
+
+
+This algorithm can be used to obtain $\mathbf{w}$ and $b$, which can then be used to predict labels of the test samples using equation \ref{df}. Implement this algorithm for the task of classification on the data given in Piazza Resources as \texttt{HW3\_Q2\_Data.zip}. Report your accuracy on the test set, and the number of iterations it took  the algorithm to converge on the training set.
+
+\begin{algorithm}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+
+Let  $\mathbf{w = 0}$, $i = 0$, $numIter = 100$  \\
+\While{!(all samples correctly classfied) AND $i < numIter$}
+{
+\For{$s = 1, 2, .. n $}  
+  {
+  \If{ $y_s(\mathbf{w^T x_s} + b) \leq 0$}{
+    $\mathbf{w} = \mathbf{w} + y_s \mathbf{x_s}$\;
+    $b = b + y_s$ \;
+   }
+
+	}
+	$i = i + 1$ \;
+	}
+\Return $\mathbf{w}, b, i$
+\caption{Perceptron algorithm on training samples}
+\label{alg:pa1}
+\end{algorithm}
+
+\begin{soln}
+        % Type solution here
+\end{soln}
+

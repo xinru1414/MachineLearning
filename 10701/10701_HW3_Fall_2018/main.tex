@@ -1,0 +1,80 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb, amsthm, enumerate, framed, graphicx}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{hw}
+\usepackage{bm}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{float}
+\setlength{\marginparwidth}{2.15cm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{epsfig}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{parskip}
+\usepackage[]{algorithm2e}
+
+\newcommand{\comment}[1]{\textcolor{blue}{\textsc{\textbf{[#1]}}}}
+
+% Some commands to allow solutions to be embedded in the assignment file.
+\ifcsname issoln\endcsname \else \def\issoln{1} \fi
+\newcommand{\soln}[1]
+{
+  \if\issoln 1
+  \textbf{Solution:}
+  #1
+  \fi
+}
+\newcommand{\norm}[1]{\lVert #1 \rVert}
+\newcommand{\st}{\mathrm{s.t.}}
+
+\makeatletter
+\newcommand{\removelatexerror}{\let\@latex@error\@gobble}
+\makeatother
+
+\begin{document}
+
+\section*{}
+\begin{center}
+  \centerline{\textsc{\LARGE Homework 3}}
+  \vspace{1em}
+  \centerline{\textsc{\Large Support Vector Machines and Neural Networks}}
+  \vspace{1em}
+  \textsc{\large CMU 10-701: Machine Learning (Fall 2018)} \\
+  \textsc{Authors: Yang Gao, Sarah Mallepalle, Umang Bhatt}
+  \centerline{OUT: Oct 3}
+  \centerline{DUE: Oct 17, 11:59 PM}
+\end{center}
+
+
+\section*{START HERE: Instructions}
+
+
+\begin{itemize*}
+\item \textbf{Collaboration policy:} Collaboration on solving the homework is allowed, after you have thought about the problems on your own.  It is also OK to get clarification (but not solutions) from books or online resources, again after you have thought about the problems on your own.  There are two requirements: first, cite your collaborators fully and completely (e.g., ``Jane explained to me what is asked in Question 3.4'').  Second, write your solution {\em independently}: close the book and all of your notes, and send collaborators out of the room, so that the solution comes from you only.
+
+\vspace{0.1in}
+\item\textbf{Submitting your work:} Assignments should be submitted as PDFs using \href{https://gradescope.com/}{Gradescope} unless explicitly stated otherwise.  Submissions written in latex are preferred however handwritten submissions are also allowed, please follow the instructions below for each format:\\
+\textbf{Latex:} If you are submitting a Latex document each derivation/proof written between the begin\{soln\} and the end\{soln\} for that specific question. \\
+\textbf{Handwritten:} Submissions can be handwritten in which case please submit each solution on a seperate page. You are in charge of making sure your solutions are legible if we cannot read your solutions you will not be given credit for them.\\
+Upon submission, label each question using the template provided by Gradescope. 
+
+\vspace{0.1in}
+\item \textbf{Programming}: All programming portions of the assignments should be submitted to \href{https://autolab.andrew.cmu.edu/courses/10701-f18/assessments}{Autolab}.  We will not be using this for autograding, meaning you may use any language which you like to submit.
+\end{itemize*}
+
+\newpage
+
+\input{Problem1}
+\newpage
+\input{Problem2}
+\newpage
+\input{Problem3}
+\newpage
+\input{Problem4}
+\newpage
+\input{Problem5}
+
+\end{document}

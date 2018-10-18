@@ -1,3 +1,6 @@
+"""
+This program implements Naive Bayes for 
+"""
 import math
 import pandas as pd
 import statistics
@@ -45,22 +48,22 @@ def less_data(data_df):
 def discrete_parameter(data_df):
 	g_prob = []
 	l_prob = []
-	#print("=======================================================================================")
-	#print("Discrete Feature\n")
-	#print("Class >50K")
+	print("=======================================================================================")
+	print("Discrete Feature\n")
+	print("Class >50K")
 	g_data_df = greater_data(data_df).filter(items=discrete_list)
 	l_data_df = less_data(data_df).filter(items=discrete_list)
 
 	for column in g_data_df:
 		g = g_data_df[column].value_counts()/len(g_data_df.index)
-	#	print(column + " " + str({k:math.log(v) for k, v in g.to_dict().items()}))
+		print(column + " " + str({k:round(v,4) for k, v in g.to_dict().items()}))
 		g_prob.append({k:math.log(v) for k, v in g.to_dict().items()})
 
 
-	#print("\nClass <=50K")
+	print("\nClass <=50K")
 	for column in l_data_df:
 		l = l_data_df[column].value_counts()/len(l_data_df.index)
-	#	print(column + " " + str({k:math.log(v) for k, v in l.to_dict().items()}))
+		print(column + " " + str({k:round(v, 4)for k, v in l.to_dict().items()}))
 		l_prob.append({k:math.log(v) for k, v in l.to_dict().items()})
 	
 	return list(zip(g_prob, l_prob))
@@ -97,25 +100,25 @@ def discrete_prob(model, data_df):
 def continuous_parameter(data_df):
 	greater_parameters = []
 	less_parameters = []
-	#print("=======================================================================================")
-	#print("Continuous Feature")
-	#print("Class >50K")
+	print("=======================================================================================")
+	print("Continuous Feature")
+	print("Class >50K")
 	g_data = greater_data(data_df).filter(items=continuous_list)
 	for column in g_data:
 		mean = round(statistics.mean(list(map(int,g_data[column]))),4)
 		variance = round(statistics.variance(list(map(int,g_data[column]))),4)
 		greater_parameters.append((mean, variance))
 		# report mean and variance
-	#	print(column + " " + str(mean)+ " " + str(variance))
+		print(column + " " + str(mean)+ " " + str(variance))
 
-	#print("Class <=50K")
+	print("Class <=50K")
 	l_data = less_data(data_df).filter(items=continuous_list)
 	for column in l_data:
 		mean = round(statistics.mean(list(map(int,l_data[column]))),4)
 		variance = round(statistics.variance(list(map(int,l_data[column]))),4)
 		less_parameters.append((mean, variance))
 		# report mean and variance
-	#	print(column + " " + str(mean)+ " " + str(variance))
+		print(column + " " + str(mean)+ " " + str(variance))
 
 	return list(zip(greater_parameters, less_parameters))
 
@@ -166,6 +169,7 @@ def prior(train_df):
 	p_greater = float(count_greater) / float(len(train_df))
 	p_less = float(count_less) / float(len(train_df))
 
+	print("Prior >50k, <=50k " + str(p_greater) + " " + str(p_less))
 	return (p_greater, p_less)
 
 def predict(model, data_df):
@@ -192,7 +196,7 @@ def make_prediction(data_df):
 	return data_df
 
 def accuracy(data_df):
-	#print(data_df)
+	print(data_df)
 	correct_count = 0
 	for i in range(len(data_df)):
 		if data_df['Class'][i] == data_df["Predicted Class"][i]:
